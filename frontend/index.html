@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#09090f" />
+  <title>SonicWave — Music for your mood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" data-page="home"><span class="brand-mark">♫</span><span>Sonic<span>Wave</span></span></a>
+      <div class="side-label">MENU</div>
+      <nav class="main-nav">
+        <button class="nav-link active" data-page="home"><span>⌂</span>Home</button>
+        <button class="nav-link" data-page="explore"><span>◈</span>Explore</button>
+        <button class="nav-link" data-page="search"><span>⌕</span>Search</button>
+        <button class="nav-link" data-page="library"><span>▤</span>Your Library</button>
+      </nav>
+      <div class="side-label collection-label">YOUR COLLECTION</div>
+      <nav class="main-nav">
+        <button class="nav-link" data-page="recent"><span>◷</span>Recently Played</button>
+        <button class="nav-link" data-page="liked"><span>♡</span>Liked Songs</button>
+        <button class="nav-link" data-page="playlists"><span>▧</span>Playlists</button>
+      </nav>
+      <div class="sidebar-playlists">
+        <div class="side-label">YOUR PLAYLISTS</div>
+        <div id="sidebarPlaylists"></div>
+        <button class="create-playlist" id="createPlaylist"><span>＋</span> Create Playlist</button>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="upgrade-card"><div class="upgrade-orb">✦</div><strong>Feel every beat.</strong><p>Your sound, your world.</p></div>
+        <div class="profile"><div class="avatar">S</div><div><strong>Sound Seeker</strong><small>Free account</small></div><span class="more">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">♫</span> Sonic<span>Wave</span></div>
+        <div class="history-controls"><button aria-label="Back" id="backBtn">‹</button><button aria-label="Forward" id="forwardBtn">›</button></div>
+        <label class="top-search"><span>⌕</span><input id="quickSearch" type="search" placeholder="What do you want to listen to?" /><kbd>⌘ K</kbd></label>
+        <button class="icon-button notification" aria-label="Notifications">♧</button>
+        <button class="account-button" id="accountButton"><span class="avatar small" id="accountAvatar">S</span><span id="accountLabel">Login</span><span>⌄</span></button>
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+      </header>
+
+      <div class="page-wrap" id="pageContent">
+        <section class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="live-dot"></span> YOUR DAILY SOUNDTRACK</div>
+            <h1>Music that moves<br><em>you.</em></h1>
+            <p>Discover new sounds, revisit old favourites, and find the rhythm of your day.</p>
+            <button class="primary-button" id="heroPlay">▶ <span>Start listening</span></button>
+          </div>
+          <div class="hero-art">
+            <div class="hero-glow"></div>
+            <div class="hero-disc"></div>
+            <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=700&auto=format&fit=crop&q=85" alt="Abstract atmospheric album artwork">
+            <div class="floating-note note-one">♫</div><div class="floating-note note-two">♪</div>
+            <div class="hero-caption"><span>NOW PLAYING</span><strong>Midnight Frequencies</strong><small>SONICWAVE SELECTS</small></div>
+          </div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading"><div><div class="eyebrow">PICK UP WHERE YOU LEFT OFF</div><h2>Good evening</h2></div><button class="text-button" data-page="recent">See all <span>→</span></button></div>
+          <div class="quick-grid" id="quickGrid"></div>
+        </section>
+        <section class="section-block">
+          <div class="section-heading"><div><div class="eyebrow">CURATED FOR YOU</div><h2>Made for your moments</h2></div><button class="text-button" data-page="explore">Explore all <span>→</span></button></div>
+          <div class="music-grid" id="madeForYou"></div>
+        </section>
+        <section class="section-block">
+          <div class="section-heading"><div><div class="eyebrow">THE WORLD IS LISTENING</div><h2>Trending right now</h2></div><button class="text-button" data-page="explore">View charts <span>→</span></button></div>
+          <div class="track-table" id="trendingTracks"></div>
+        </section>
+        <section class="section-block">
+          <div class="section-heading"><div><div class="eyebrow">FIND YOUR NEXT OBSESSION</div><h2>Popular artists</h2></div></div>
+          <div class="artist-row" id="popularArtists"></div>
+        </section>
+        <section class="section-block">
+          <div class="section-heading"><div><div class="eyebrow">FRESH FROM THE STUDIO</div><h2>New releases</h2></div></div>
+          <div class="music-grid" id="newReleases"></div>
+        </section>
+      </div>
+      <footer class="footer"><span>© 2026 SonicWave</span><span>Made for the love of music <b>♥</b></span></footer>
+    </main>
+  </div>
+
+  <section class="player" aria-label="Music player">
+    <div class="now-playing">
+      <img id="playerCover" src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=120&auto=format&fit=crop&q=80" alt="Current track artwork">
+      <div class="track-meta"><strong id="playerTitle">Choose a track</strong><small id="playerArtist">SonicWave</small></div>
+      <button class="like-button" id="playerLike" aria-label="Like track">♡</button>
+    </div>
+    <div class="player-center">
+      <div class="player-controls">
+        <button class="control-button" id="shuffleBtn" title="Shuffle">⤨</button>
+        <button class="control-button" id="prevBtn" title="Previous">|◀</button>
+        <button class="play-button" id="playBtn" title="Play">▶</button>
+        <button class="control-button" id="nextBtn" title="Next">▶|</button>
+        <button class="control-button" id="repeatBtn" title="Repeat">↻</button>
+      </div>
+      <div class="progress-row"><span id="currentTime">0:00</span><input id="seekBar" type="range" min="0" max="100" value="0" aria-label="Track progress"><span id="duration">0:00</span></div>
+    </div>
+    <div class="player-extra"><button class="control-button queue-button" title="Queue">☷</button><span>◖</span><input id="volumeBar" type="range" min="0" max="1" step="0.01" value="0.75" aria-label="Volume"><button class="control-button" title="Expand player">⛶</button></div>
+  </section>
+
+  <dialog id="playlistDialog">
+    <form method="dialog" id="playlistForm">
+      <button class="dialog-close" value="cancel" aria-label="Close">×</button>
+      <div class="eyebrow">MAKE IT YOURS</div><h2>Create a playlist</h2><p>Give your next mood a name.</p>
+      <input id="playlistName" maxlength="32" placeholder="e.g. Late night drives" required>
+      <div class="dialog-actions"><button class="secondary-button" value="cancel">Cancel</button><button class="primary-button" id="savePlaylist" value="default">Create playlist</button></div>
+    </form>
+  </dialog>
+  <dialog id="accountDialog">
+    <form method="dialog" id="accountForm">
+      <button class="dialog-close" value="cancel" aria-label="Close">×</button>
+      <div class="eyebrow">YOUR SONICWAVE ACCOUNT</div><h2 id="accountTitle">Login</h2>
+      <p id="accountMessage">Sign in to sync your likes, playlists and listening history.</p>
+      <label class="account-field">Username<input id="authUsername" autocomplete="username" required></label>
+      <label class="account-field" id="emailField" hidden>Email<input id="authEmail" type="email" autocomplete="email"></label>
+      <label class="account-field">Password<input id="authPassword" type="password" autocomplete="current-password" minlength="8" required></label>
+      <div class="dialog-actions"><button type="button" class="secondary-button" id="authModeButton">Create account</button><button type="button" class="primary-button" id="authSubmit">Login</button></div>
+      <button type="button" class="text-button" id="logoutButton" hidden>Logout</button>
+    </form>
+  </dialog>
+  <audio id="audio" preload="metadata"></audio>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
